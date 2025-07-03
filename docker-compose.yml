@@ -1,0 +1,18 @@
+services:
+  api:
+    # Constrói a imagem a partir do Dockerfile no diretório atual.
+    # O Docker Compose usará o comando CMD definido no Dockerfile para iniciar o contêiner.
+    build: .
+    container_name: minha-fastapi-app #nome do container
+    
+    # Mapeia a porta 8000 do seu computador para a porta 8000 do contêiner.
+    ports:
+      - "8000:8000"
+      
+    # Monta o diretório atual como um volume dentro do contêiner.
+    # Isto é essencial para que o --reload (definido no CMD do Dockerfile) funcione,
+    # refletindo as alterações do seu código em tempo real e persistindo o banco de dados.
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONBUFFERED=1 #garante que os logs do Python apareçam imediatamente
